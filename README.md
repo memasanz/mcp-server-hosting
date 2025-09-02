@@ -157,3 +157,6 @@ To add new MCP tools to the Python weather server:
 - Implement authentication patterns
 - Add integration tests
 - Consider rate limiting for production use
+
+- Security:
+https://github.com/jlowin/fastmcp/tree/main/examples/auth/azure_oauth

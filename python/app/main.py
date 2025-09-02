@@ -7,11 +7,13 @@
 import argparse
 from typing import Any
 from datetime import datetime
+import os
 
 import httpx
 import uvicorn
+from fastapi import status, HTTPException, Depends
 
-from mcp.server.fastmcp import FastMCP, Depends
+from mcp.server.fastmcp import FastMCP
 
 from app.weather.tools import get_alerts, get_forecast
 from app.powerpoint.tools import get_layout_names_from_blob_url, add_slide_from_blob_url
@@ -22,10 +24,12 @@ mcp = FastMCP(
     name="weather",
     json_response=True,     # Use JSON responses
     stateless_http=False,   # Use persistent connections
-    dependencies=[Depends(ensure_valid_api_key)])
+)
 
-
+# Get the FastAPI app instance
 app = mcp.streamable_http_app
+
+
 
 mcp.tool()(get_alerts)
 mcp.tool()(get_forecast)
