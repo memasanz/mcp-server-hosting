@@ -33,7 +33,7 @@ Run locally:
 ```
 
 The MCP server will be available at `http://localhost:8000/mcp`
-Health check available at `http://localhost:8000/api/health`
+
 
 ## MCP Client Configuration
 
@@ -72,7 +72,6 @@ docker build -t mcp-weather-server .
 docker run -p 8000:8000 mcp-weather-server
 ```
 
-Health check: `http://localhost:8000/api/health`
 MCP endpoint: `http://localhost:8000/mcp`
 
 ## Available MCP Tools
