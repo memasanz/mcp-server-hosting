@@ -2,7 +2,7 @@
 #app = FastAPI(title="Hello Work API", version="0.1.0")
 #app = FastAPI(docs_url=None, redoc_url=None, dependencies=[Depends(ensure_valid_api_key)])
 
-"""Weather tools for MCP Streamable HTTP server using NWS API."""
+""" tools for MCP Streamable HTTP server using NWS API."""
 
 import argparse
 from typing import Any
@@ -11,18 +11,19 @@ from datetime import datetime
 import httpx
 import uvicorn
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp import FastMCP, Depends
 
 from app.weather.tools import get_alerts, get_forecast
 from app.powerpoint.tools import get_layout_names_from_blob_url, add_slide_from_blob_url
-
+from app.api_key_auth import ensure_valid_api_key
 
 # Initialize FastMCP server with extended timeouts
 mcp = FastMCP(
     name="weather",
     json_response=True,     # Use JSON responses
     stateless_http=False,   # Use persistent connections
-)
+    dependencies=[Depends(ensure_valid_api_key)])
+
 
 app = mcp.streamable_http_app
 

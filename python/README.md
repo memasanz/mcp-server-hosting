@@ -3,8 +3,21 @@
 This is an MCP (Model Context Protocol) weather server that provides weather alerts and forecasts using the National Weather Service API. It uses FastMCP with streamable HTTP transport and is deployed on Azure Container Apps.
 
 ## MCP Tools
+
+### Weather Tools
 - `get_alerts(state)` -> Get weather alerts for a US state (e.g., "MN", "CA")
 - `get_forecast(latitude, longitude)` -> Get weather forecast for specific coordinates
+
+### PowerPoint Tools
+- `get_layout_names_from_blob_url(blob_url)` -> Gets a list of available slide layouts from a PowerPoint template stored in Azure Blob Storage
+- `add_slide_from_blob_url(source_url, content, slide_type?, dest_url?, comments?, cleanup_temp_files?, check_fit?)` -> Adds a new slide to a PowerPoint file with content formatting and layout options
+  - `source_url`: Source blob URL with SAS token to the PowerPoint file
+  - `content`: Content to be added to the slide (text with optional LEFT/RIGHT COLUMN markers)
+  - `slide_type`: (Optional) Exact slide layout name to use
+  - `dest_url`: (Optional) Destination blob URL with SAS token for saving
+  - `comments`: (Optional) Presenter comments for the slide
+  - `cleanup_temp_files`: (Optional) Whether to delete temporary files after processing
+  - `check_fit`: (Optional) Whether to check if content might be too large for the slide and adjust font sizes
 
 ## Server Endpoint
 - **MCP Endpoint**: `/mcp` - Main MCP protocol endpoint for tool calls
